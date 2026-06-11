@@ -1,4 +1,4 @@
-import { FaGithub, FaExternalLinkAlt, FaRobot, FaHospital, FaBus, FaGraduationCap } from "react-icons/fa";
+import { FaGithub, FaRobot, FaHospital, FaBus, FaGraduationCap } from "react-icons/fa";
 
 export default function Projects() {
   const projects = [
@@ -33,36 +33,37 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 px-6 bg-[#0b1220] text-white">
+    <section id="projects" className="py-20 md:py-24 px-4 sm:px-6 bg-[#0b1220] text-white overflow-x-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* Header Section */}
         <p className="text-xs uppercase tracking-[0.3em] text-purple-400 font-semibold mb-2 text-center">
           What I've Built
         </p>
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-white">
-           Projects
+        <h2 className="text-3xl md:text-5xl font-bold text-center text-white">
+          Projects
         </h2>
-        <div className="w-16 h-1 bg-purple-500 mx-auto mt-4 rounded-full mb-14"></div>
+        <div className="w-16 h-1 bg-purple-500 mx-auto mt-4 rounded-full mb-10 md:mb-14"></div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Projects Grid - Balanced columns with optimized gaps for mobile devices */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
           {projects.map((p) => (
             <div
               key={p.title}
-              className="flex flex-col justify-between bg-[#111827]/50 border border-[#222e45] p-8 rounded-2xl hover:border-purple-500/50 transition duration-300 group"
+              className="flex flex-col justify-between bg-[#111827]/50 border border-[#222e45] p-6 sm:p-8 rounded-2xl hover:border-purple-500/50 transition-all duration-300 group shadow-lg"
             >
               <div>
                 {/* Top Row: Icon & Github Link */}
-                <div className="flex justify-between items-center mb-6">
-                  <div className="text-3xl text-purple-400 group-hover:text-purple-300 transition-colors duration-300">
+                <div className="flex justify-between items-center mb-5 md:mb-6">
+                  <div className="text-2xl sm:text-3xl text-purple-400 group-hover:text-purple-300 transition-colors duration-300">
                     {p.icon}
                   </div>
+                  {/* Optimized Mobile Click Target Container */}
                   <a
                     href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white text-xl transition-colors duration-300"
+                    className="text-gray-400 hover:text-white active:text-purple-400 text-2xl p-2 -m-2 transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center relative z-10"
                     title="View Source Code"
                   >
                     <FaGithub />
@@ -70,22 +71,22 @@ export default function Projects() {
                 </div>
 
                 {/* Project Titles */}
-                <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
+                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
                   {p.title}
                 </h3>
 
                 {/* Project Description */}
-                <p className="text-gray-400 mt-3 text-sm leading-relaxed font-light">
+                <p className="text-gray-400 mt-3 text-xs sm:text-sm leading-relaxed font-light">
                   {p.desc}
                 </p>
               </div>
 
               {/* Bottom Row: Badges */}
-              <div className="mt-8 pt-4 border-t border-[#1d293d] flex flex-wrap gap-2">
+              <div className="mt-6 md:mt-8 pt-4 border-t border-[#1d293d] flex flex-wrap gap-2">
                 {p.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-medium bg-[#1d293d] text-purple-300 px-3 py-1 rounded-md border border-[#2e3b52]"
+                    className="text-[10px] sm:text-xs font-medium bg-[#1d293d] text-purple-300 px-2.5 py-1 rounded-md border border-[#2e3b52] select-none"
                   >
                     {tag}
                   </span>
