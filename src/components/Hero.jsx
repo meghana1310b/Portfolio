@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Typewriter from "typewriter-effect";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Hero() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const socials = [
     {
       icon: <FaEnvelope />,
@@ -27,17 +30,46 @@ export default function Hero() {
     { value: "4+", label: "Core Technologies" },
   ];
 
+  const navLinks = [
+    { label: "Home", href: "#home" },
+    { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
+  ];
+
   return (
-    <section id="home" className="w-full bg-[#0b1220] text-white pt-24 pb-16 md:pt-32 px-4 sm:px-6 overflow-hidden">
+    <section
+      id="home"
+      className="w-full bg-[#0b1220] text-white pt-24 sm:pt-28 md:pt-32 pb-16 px-4 sm:px-6 overflow-hidden relative"
+    >
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden fixed top-4 right-4 z-[200] w-11 h-11 rounded-xl bg-[#111827] border border-[#222e45] text-white flex items-center justify-center shadow-lg"
+        aria-label="Toggle menu"
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {menuOpen && (
+        <div className="md:hidden fixed top-16 right-4 z-[200] w-56 bg-[#111827] border border-[#222e45] rounded-2xl shadow-2xl p-3">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-sm text-gray-300 hover:bg-[#1d293d] hover:text-purple-400 transition"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="max-w-6xl w-full mx-auto flex flex-col gap-12 md:gap-16">
-        
-        {/* UPPER CONTENT: TEXT AND IMAGE SPLIT - Controlled stack behavior for touch screens */}
         <div className="w-full flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-12">
-          
-          {/* LEFT TEXT CONTENT */}
           <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-            
-            {/* Increased Sizing and Weight for the Opportunities Tag */}
             <p className="text-xs sm:text-sm md:text-base uppercase tracking-[0.25em] text-emerald-400 font-bold mb-4">
               Available for opportunities
             </p>
@@ -46,14 +78,14 @@ export default function Hero() {
               Bandi Sai <span className="text-purple-400">Meghana</span>
             </h1>
 
-            <div className="text-lg sm:text-xl md:text-2xl text-purple-300 mt-3 font-light tracking-wide h-8">
+            <div className="text-lg sm:text-xl md:text-2xl text-purple-300 mt-3 font-light tracking-wide h-8 w-full">
               <Typewriter
                 options={{
                   strings: [
                     "Full Stack Developer",
                     "MERN Stack Developer",
                     "React Developer",
-                    "Frontend Engineer"
+                    "Frontend Engineer",
                   ],
                   autoStart: true,
                   loop: true,
@@ -63,12 +95,11 @@ export default function Hero() {
             </div>
 
             <p className="text-gray-400 mt-5 leading-relaxed text-xs sm:text-sm md:text-base font-light max-w-md sm:max-w-lg md:max-w-xl">
-              Passionate Software Engineer specialized in crafting scalable full-stack web architectures, 
+              Passionate Software Engineer specialized in crafting scalable full-stack web architectures,
               responsive front-end interfaces, and complex interactive systems.
             </p>
 
-            {/* ACTION BUTTONS - Optimized click target size matching mobile criteria */}
-            <div className="flex gap-3 sm:gap-4 mt-8 w-full justify-center md:justify-start">
+            <div className="flex gap-3 sm:gap-4 mt-8 w-full justify-center md:justify-start flex-wrap">
               <a
                 href="#contact"
                 className="flex-1 sm:flex-initial text-center bg-purple-600 px-5 sm:px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 text-xs sm:text-sm font-medium tracking-wide shadow-lg min-h-[44px] flex items-center justify-center"
@@ -76,7 +107,6 @@ export default function Hero() {
                 Get In Touch
               </a>
 
-              {/* Updated target to route seamlessly down to your experience section */}
               <a
                 href="#experience"
                 className="flex-1 sm:flex-initial text-center border border-[#334155] px-5 sm:px-6 py-3 rounded-lg hover:bg-purple-500 hover:border-purple-600 transition duration-300 text-xs sm:text-sm font-medium tracking-wide min-h-[44px] flex items-center justify-center"
@@ -85,7 +115,6 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* SOCIAL LINKS ROW */}
             <div className="flex gap-4 mt-10 pt-5 border-t border-[#1d293d] w-full justify-center md:justify-start">
               {socials.map((social, idx) => (
                 <a
@@ -102,7 +131,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT PROFILE IMAGE - Scaled responsively down on mobile layouts */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-end">
             <div className="relative p-1 bg-[#111827] border border-[#222e45] rounded-2xl shadow-2xl hover:border-purple-500/50 transition duration-300 max-w-[260px] sm:max-w-sm md:max-w-none">
               <img
@@ -113,14 +141,15 @@ export default function Hero() {
               <div className="absolute -inset-0.5 bg-purple-500 rounded-2xl opacity-5 blur-xl pointer-events-none"></div>
             </div>
           </div>
-
         </div>
 
-        {/* LOWER CONTENT: METRICS PANEL */}
         <div className="w-full pt-8 border-t border-[#1d293d]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center md:text-left">
             {metrics.map((metric, idx) => (
-              <div key={idx} className="bg-[#111827]/30 border border-[#222e45]/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6">
+              <div
+                key={idx}
+                className="bg-[#111827]/30 border border-[#222e45]/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6"
+              >
                 <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-purple-400 tracking-tight">
                   {metric.value}
                 </p>
@@ -131,7 +160,6 @@ export default function Hero() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
